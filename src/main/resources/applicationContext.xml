@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.sppringframework.org/schema/context"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://springframework.org/schema/beans/spring-beans.xsd
-	http://springframework.org/schema/context
-	http://springframework.org/schema/context/spring-context.xsd">
-	
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<context:property-placeholder location="classpath:sport.properties"/>
 	
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+		<value>classpath:sport.properties</value>
+		</property>
+	</bean>
 	<bean id="myCoach" 
 		class="com.mike.spring5study.coach.SwimmingCoach">
+		<!-- Constructor Injection -->
 		<constructor-arg ref="myDietitian"/>
 	</bean>
 	
@@ -18,5 +24,12 @@
 		class="com.mike.spring5study.diet.maleDietitian">
 	</bean>
 	
+	<bean id="myBasketballCoach"
+		class="com.mike.spring5study.coach.BasketballCoach">
+		<!-- Setter Injection -->
+		<property name="dietService" ref="myDietitian"/>
+		<property name="team" value="${coach.team}" />
+		<property name="emailAddress" value="${coach.email}"  />
+	</bean>
 </beans>
 	

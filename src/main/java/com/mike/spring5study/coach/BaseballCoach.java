@@ -6,10 +6,6 @@ public class BaseballCoach implements Coach{
 	
 	private DietService myDietService;
 	
-	public BaseballCoach( DietService dietService) {
-		myDietService = dietService;
-	}
-	
 	public String getDailyWorkout() {
 		return "Spend 30 minutes on batting practice";
 	}
@@ -17,6 +13,8 @@ public class BaseballCoach implements Coach{
 	public String getDailyDiet() {
 		return myDietService.getDailyDiet();
 	}
-	
-	
+
+	public BaseballCoach( DietService dietService) {
+		myDietService = dietService;
+	}
 }
